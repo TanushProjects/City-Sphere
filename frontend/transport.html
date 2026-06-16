@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="day">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="CitySphere Transport - Plan routes, check metro timings, and compare travel options">
+    <title>Smart Transport | CitySphere</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="glass-nav">
+        <div class="navbar">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon"><img src="/CitySphere/frontend/images/icon.png" alt="CitySphere logo"></div>
+                <span>CitySphere</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="transport.html" class="active">Transport</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="map.html">City Map</a></li>
+                <li><a href="budget.html">Budget</a></li>
+            </ul>
+            <div class="nav-actions"><button class="theme-toggle">🌙</button></div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" style="min-height: 50vh;">
+        <div class="container">
+            <h1>Smart <span class="text-gradient">Transport</span> Planner</h1>
+            <p>Find the fastest, cheapest route anywhere in Delhi NCR</p>
+        </div>
+    </section>
+
+    <!-- Route Planner -->
+    <section style="padding: var(--space-2xl);">
+        <div class="container">
+            <div class="glass-card" style="max-width: 800px; margin: 0 auto;">
+                <h3>🗺️ Plan Your Route</h3>
+                <p style="margin-top: 0.25rem; color: var(--text-muted); font-size: 0.95rem;">Tip: choose
+                    "Use my current location" to start from your device (allow location access).</p>
+
+                <div class="flex gap-lg" style="flex-wrap: wrap;">
+                    <div class="form-group" style="flex: 1; min-width: 250px;">
+                        <label class="form-label">From</label>
+                        <select id="originSelect" class="form-input">
+                            <option value="current">Use my current location</option>
+                            <option value="Connaught Place, New Delhi">Connaught Place (CP)</option>
+                            <option value="Red Fort, Delhi">Red Fort</option>
+                            <option value="India Gate, New Delhi">India Gate</option>
+                            <option value="Rajiv Chowk, New Delhi">Rajiv Chowk</option>
+                            <option value="DLF Promenade, Gurugram">DLF Promenade (Gurugram)</option>
+                            <option value="Cyber Hub, Gurugram">Cyber Hub (Gurugram)</option>
+                            <option value="DLF Mall of India, Noida">DLF Mall of India (Noida)</option>
+                            <option value="Sector 18, Noida">Noida Sector 18</option>
+                            <option value="Gurugram, Haryana">Gurugram</option>
+                            <option value="Noida, Uttar Pradesh">Noida</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" style="flex: 1; min-width: 250px;">
+                        <label class="form-label">To</label>
+                        <select id="destinationSelect" class="form-input">
+                            <option value="India Gate, New Delhi">India Gate</option>
+                            <option value="Connaught Place, New Delhi">Connaught Place (CP)</option>
+                            <option value="Red Fort, Delhi">Red Fort</option>
+                            <option value="Rajiv Chowk, New Delhi">Rajiv Chowk</option>
+                            <option value="DLF Promenade, Gurugram">DLF Promenade (Gurugram)</option>
+                            <option value="Cyber Hub, Gurugram">Cyber Hub (Gurugram)</option>
+                            <option value="DLF Mall of India, Noida">DLF Mall of India (Noida)</option>
+                            <option value="Sector 18, Noida">Noida Sector 18</option>
+                            <option value="Indira Gandhi International Airport, New Delhi">IGI Airport</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="flex gap-md mt-lg">
+                    <button id="findFastestBtn" class="btn btn-primary">🚀 Find Fastest</button>
+                    <button id="findCheapestBtn" class="btn btn-secondary">💰 Find Cheapest</button>
+                    <button id="detectLocationBtn" class="btn"
+                        style="background:transparent;border:1px solid var(--text-muted);">📍 Detect my
+                        location</button>
+                </div>
+                <div id="geoStatus" style="margin-top:0.5rem;font-size:0.9rem;color:var(--text-muted);"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Route Results -->
+    <section style="padding: var(--space-2xl); background: var(--card-bg);">
+        <div class="container">
+            <h2 class="section-header">Route <span class="text-gradient">Options</span></h2>
+
+            <div class="dashboard-grid" style="max-width: 1000px; margin: 0 auto;">
+                <!-- Metro Route -->
+                <div class="glass-card" style="border-left: 4px solid #22c55e;">
+                    <div class="flex justify-between items-center">
+                        <span
+                            style="background: #22c55e; color: white; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem;">Fastest</span>
+                        <span style="font-weight: 700; color: var(--primary);">15 mins</span>
+                    </div>
+                    <h4 class="mt-md">🚇 Metro</h4>
+                    <div style="margin: 1rem 0; padding: 1rem; background: rgba(0,0,0,0.05); border-radius: 8px;">
+                        <p style="margin: 0;">Walk 5 min → <strong>Rajiv Chowk</strong> → <strong>Central
+                                Secretariat</strong> → Walk 5 min</p>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>💰 ₹40</span>
+                        <span>👥 Moderate crowd</span>
+                    </div>
+                </div>
+
+                <!-- Bus Route -->
+                <div class="glass-card" style="border-left: 4px solid #3b82f6;">
+                    <div class="flex justify-between items-center">
+                        <span
+                            style="background: #3b82f6; color: white; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem;">Cheapest</span>
+                        <span style="font-weight: 700; color: var(--primary);">25 mins</span>
+                    </div>
+                    <h4 class="mt-md">🚌 Bus</h4>
+                    <div style="margin: 1rem 0; padding: 1rem; background: rgba(0,0,0,0.05); border-radius: 8px;">
+                        <p style="margin: 0;">Walk 3 min → <strong>Bus 764</strong> → Walk 4 min</p>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>💰 ₹15</span>
+                        <span>👥 High crowd</span>
+                    </div>
+                </div>
+
+                <!-- Cab Route -->
+                <div class="glass-card" style="border-left: 4px solid #a855f7;">
+                    <div class="flex justify-between items-center">
+                        <span
+                            style="background: #a855f7; color: white; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem;">Comfortable</span>
+                        <span style="font-weight: 700; color: var(--primary);">12 mins</span>
+                    </div>
+                    <h4 class="mt-md">🚕 Cab</h4>
+                    <div style="margin: 1rem 0; padding: 1rem; background: rgba(0,0,0,0.05); border-radius: 8px;">
+                        <p style="margin: 0;">Direct ride via <strong>Janpath Road</strong></p>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>💰 ₹120-150</span>
+                        <span>👥 Private</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metro Lines -->
+    <section style="padding: var(--space-2xl);">
+        <div class="container">
+            <h2 class="section-header">Metro <span class="text-gradient">Lines</span></h2>
+
+            <div class="dashboard-grid" style="max-width: 1000px; margin: 0 auto;">
+                <!-- Agra -->
+                <div class="glass-card">
+                    <h4>🏛️ Agra (Taj Mahal)</h4>
+                    <p>233 km from Delhi</p>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 1rem;">
+                        <div
+                            style="text-align: center; padding: 0.5rem; background: rgba(0,0,0,0.05); border-radius: 8px;">
+                            <div style="font-weight: 700;">🚗</div>
+                            <div style="font-size: 0.875rem;">3.5 hrs</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">₹1,500</div>
+                        </div>
+                        <div
+                            style="text-align: center; padding: 0.5rem; background: rgba(0,0,0,0.05); border-radius: 8px;">
+                            <div style="font-weight: 700;">🚌</div>
+                            <div style="font-size: 0.875rem;">4.5 hrs</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">₹250-600</div>
+                        </div>
+                        <div
+                            style="text-align: center; padding: 0.5rem; background: rgba(34, 197, 94, 0.1); border-radius: 8px; border: 1px solid #22c55e;">
+                            <div style="font-weight: 700;">🚂</div>
+                            <div style="font-size: 0.875rem;">2 hrs</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">₹165-680</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <h4>🏰 Jaipur (Pink City)</h4>
+                    <p>281 km from Delhi</p>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 1rem;">
+                        <div
+                            style="text-align: center; padding: 0.5rem; background: rgba(0,0,0,0.05); border-radius: 8px;">
+                            <div style="font-weight: 700;">🚗</div>
+                            <div style="font-size: 0.875rem;">4.5 hrs</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">₹1,875</div>
+                        </div>
+                        <div
+                            style="text-align: center; padding: 0.5rem; background: rgba(34, 197, 94, 0.1); border-radius: 8px; border: 1px solid #22c55e;">
+                            <div style="font-weight: 700;">🚌</div>
+                            <div style="font-size: 0.875rem;">5.5 hrs</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">₹400-900</div>
+                        </div>
+                        <div
+                            style="text-align: center; padding: 0.5rem; background: rgba(0,0,0,0.05); border-radius: 8px;">
+                            <div style="font-weight: 700;">🚂</div>
+                            <div style="font-size: 0.875rem;">4.5 hrs</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">₹225-820</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <h4>🏔️ Chandigarh</h4>
+                    <p>252 km from Delhi</p>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 1rem;">
+                        <div
+                            style="text-align: center; padding: 0.5rem; background: rgba(0,0,0,0.05); border-radius: 8px;">
+                            <div style="font-weight: 700;">🚗</div>
+                            <div style="font-size: 0.875rem;">4 hrs</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">₹1,630</div>
+                        </div>
+                        <div
+                            style="text-align: center; padding: 0.5rem; background: rgba(0,0,0,0.05); border-radius: 8px;">
+                            <div style="font-weight: 700;">🚌</div>
+                            <div style="font-size: 0.875rem;">5 hrs</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">₹350-800</div>
+                        </div>
+                        <div
+                            style="text-align: center; padding: 0.5rem; background: rgba(34, 197, 94, 0.1); border-radius: 8px; border: 1px solid #22c55e;">
+                            <div style="font-weight: 700;">🚂</div>
+                            <div style="font-size: 0.875rem;">3 hrs</div>
+                            <div style="font-size: 0.75rem; color: var(--text-muted);">₹185-700</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: var(--space-xl); text-align: center;">
+        <p>© 2025 CitySphere. Made with ❤️ for Indian Cities.</p>
+    </footer>
+    <script src="scripts/main.js"></script>
+    <script>
+        // Route planner: request geolocation when user selects "current" and store coords.
+        // FIXED: Single consolidated script - removed duplicate that was causing button issues
+        (function () {
+            const originSelect = document.getElementById('originSelect');
+            const destinationSelect = document.getElementById('destinationSelect');
+            const findFastestBtn = document.getElementById('findFastestBtn');
+            const findCheapestBtn = document.getElementById('findCheapestBtn');
+            const geoStatus = document.getElementById('geoStatus');
+
+            if (!originSelect || !destinationSelect || !findFastestBtn || !findCheapestBtn) return;
+
+            let currentCoords = null; // stored as 'lat,lng' string when available
+
+            function updateGeoStatus(msg) {
+                if (!geoStatus) return;
+                geoStatus.textContent = msg || '';
+            }
+
+            function requestGeolocation() {
+                return new Promise((resolve, reject) => {
+                    if (!navigator.geolocation) {
+                        updateGeoStatus('Geolocation not supported by your browser.');
+                        reject(new Error('Geolocation not supported'));
+                        return;
+                    }
+
+                    updateGeoStatus('Requesting location — please allow access...');
+
+                    navigator.geolocation.getCurrentPosition(function (pos) {
+                        currentCoords = pos.coords.latitude + ',' + pos.coords.longitude;
+                        updateGeoStatus('Location acquired. Ready to open Maps.');
+                        resolve(currentCoords);
+                    }, function (err) {
+                        console.warn('Geolocation error', err);
+                        updateGeoStatus('Unable to get location (permission denied or timed out). Please select a start location.');
+                        reject(err);
+                    }, { timeout: 15000, maximumAge: 60000 });
+                });
+            }
+
+            // If user changes origin to 'current', proactively request permission so the prompt
+            // appears immediately instead of during the click flow.
+            originSelect.addEventListener('change', function () {
+                if (originSelect.value === 'current') {
+                    // If we already have coords, update status and skip
+                    if (currentCoords) {
+                        updateGeoStatus('Using detected location.');
+                        return;
+                    }
+                    requestGeolocation().catch(() => { });
+                } else {
+                    updateGeoStatus('');
+                }
+            });
+
+            // Expose the geolocation function to the global scope so the debug button can call it.
+            window.requestCitysphereGeolocation = requestGeolocation;
+
+            // Hook up the Detect button if present — this triggers the same permission prompt and
+            // sets the origin select to 'current' when successful.
+            const detectBtn = document.getElementById('detectLocationBtn');
+            if (detectBtn) {
+                detectBtn.addEventListener('click', function () {
+                    originSelect.value = 'current';
+                    requestGeolocation().then(coords => {
+                        // Keep origin select as 'current' and show the coords in status
+                        updateGeoStatus('Location acquired: ' + coords);
+                    }).catch(err => {
+                        // Nothing extra — requestGeolocation updates status on failure
+                    });
+                });
+            }
+
+            // If page loads with 'current' already selected, request geolocation once.
+            if (originSelect.value === 'current') {
+                requestGeolocation().catch(() => { });
+            }
+
+            function openGoogleMaps(origin, destination, travelmode = 'driving') {
+                const base = 'https://www.google.com/maps/dir/?api=1';
+                const params = new URLSearchParams();
+                params.set('origin', origin);
+                params.set('destination', destination);
+                params.set('travelmode', travelmode);
+                const url = base + '&' + params.toString();
+                window.open(url, '_blank');
+            }
+
+            findFastestBtn.addEventListener('click', function () {
+                const originVal = originSelect.value;
+                const destVal = destinationSelect.value;
+                if (!destVal) { alert('Please choose a destination.'); return; }
+
+                if (originVal === 'current') {
+                    // If we already obtained coords earlier, open synchronously (no popup issue).
+                    if (currentCoords) {
+                        openGoogleMaps(currentCoords, destVal, 'driving');
+                        return;
+                    }
+
+                    // If coords not yet available, fallback to opening a blank tab synchronously
+                    // and then set its location once geolocation resolves (minimizes popup blocking).
+                    const newWin = window.open('', '_blank');
+                    if (!newWin) { alert('Popup was blocked. Please allow popups or select a start location.'); return; }
+                    try { newWin.document.write('<p style="font-family: sans-serif; padding: 1rem;">Finding your location…</p>'); } catch (e) { }
+
+                    requestGeolocation().then(coords => {
+                        const base = 'https://www.google.com/maps/dir/?api=1';
+                        const params = new URLSearchParams();
+                        params.set('origin', coords);
+                        params.set('destination', destVal);
+                        params.set('travelmode', 'driving');
+                        const url = base + '&' + params.toString();
+                        try { newWin.location.href = url; } catch (e) { window.open(url, '_blank'); try { newWin.close(); } catch (err) { } }
+                    }).catch(() => { try { newWin.close(); } catch (e) { } });
+
+                } else {
+                    openGoogleMaps(originVal, destVal, 'driving');
+                }
+            });
+
+            // Find Cheapest — use transit mode (public transport). If current location selected,
+            // behave like the fastest flow but with travelmode=transit.
+            findCheapestBtn.addEventListener('click', function () {
+                const originVal = originSelect.value;
+                const destVal = destinationSelect.value;
+                if (!destVal) { alert('Please choose a destination.'); return; }
+
+                if (originVal === 'current') {
+                    if (currentCoords) {
+                        openGoogleMaps(currentCoords, destVal, 'transit');
+                        return;
+                    }
+
+                    const newWin = window.open('', '_blank');
+                    if (!newWin) { alert('Popup was blocked. Please allow popups or select a start location.'); return; }
+                    try { newWin.document.write('<p style="font-family: sans-serif; padding: 1rem;">Finding your location…</p>'); } catch (e) { }
+
+                    requestGeolocation().then(coords => {
+                        const base = 'https://www.google.com/maps/dir/?api=1';
+                        const params = new URLSearchParams();
+                        params.set('origin', coords);
+                        params.set('destination', destVal);
+                        params.set('travelmode', 'transit');
+                        const url = base + '&' + params.toString();
+                        try { newWin.location.href = url; } catch (e) { window.open(url, '_blank'); try { newWin.close(); } catch (err) { } }
+                    }).catch(() => { try { newWin.close(); } catch (e) { } });
+
+                } else {
+                    openGoogleMaps(originVal, destVal, 'transit');
+                }
+            });
+
+        })();
+    </script>
+    <script>lucide.createIcons();</script>
+</body>
+
+</html>

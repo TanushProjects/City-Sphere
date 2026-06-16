@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="day">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="CitySphere - Smart Animated Digital Twin of Indian Cities. Real-time city information, transport, events, and more.">
+    <title>CitySphere - Smart City Digital Twin</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="glass-nav">
+        <div class="navbar">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon">
+                    <img src="/CitySphere/frontend/images/icon.png" alt="CitySphere logo">
+                </div>
+                <span>CitySphere</span>
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Dashboard</a></li>
+                <li><a href="transport.html">Transport</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="map.html">City Map</a></li>
+                <li><a href="budget.html">Budget</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="theme-toggle" aria-label="Toggle theme">🌙</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content container">
+            <div class="hero-text">
+                <h1>Your Smart <span class="text-gradient">Digital</span> City Guide</h1>
+                <p>Experience Delhi like never before. Real-time traffic, weather, events, and AI-powered
+                    recommendations - all in one futuristic dashboard.</p>
+
+                <div class="flex gap-md">
+                    <button class="btn btn-primary">
+                        <i data-lucide="compass"></i>
+                        Explore Now
+                    </button>
+                    <button class="btn btn-secondary">
+                        <i data-lucide="play-circle"></i>
+                        Watch Demo
+                    </button>
+                </div>
+
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="stat-places">1,200+</div>
+                        <div class="stat-label">Places Mapped</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="stat-routes">500+</div>
+                        <div class="stat-label">Routes Tracked</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="stat-users">1k+</div>
+                        <div class="stat-label">Potential Users</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <!-- City Skyline Image -->
+                <div class="glass-card" style="height: 400px; overflow: hidden; padding: 0;">
+                    <img src="./images/delhi.png" alt=" Delhi Cityscape"
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Dashboard Section -->
+    <section class="dashboard-section" id="dashboard">
+        <div class="container">
+            <div class="section-header">
+                <h2>Live City <span class="text-gradient">Dashboard</span></h2>
+                <p>Real-time information at your fingertips</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <!-- Weather Card -->
+                <div class="glass-card weather-card dashboard-card">
+                    <div class="card-header">
+                        <div>
+                            <p class="card-title">Current Weather</p>
+                            <div class="card-value">24°C</div>
+                        </div>
+                        <div class="weather-icon">⛅</div>
+                    </div>
+                    <p class="weather-condition">Partly Cloudy</p>
+                    <div class="weather-details">
+                        <div class="weather-detail">
+                            <div class="weather-detail-value">52%</div>
+                            <div class="weather-detail-label">Humidity</div>
+                        </div>
+                        <div class="weather-detail">
+                            <div class="weather-detail-value">12 km/h</div>
+                            <div class="weather-detail-label">Wind</div>
+                        </div>
+                        <div class="weather-detail">
+                            <div class="weather-detail-value">0%</div>
+                            <div class="weather-detail-label">Rain</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AQI Card -->
+                <div class="glass-card dashboard-card">
+                    <div class="card-header">
+                        <div class="card-icon">💨</div>
+                        <span class="aqi-level moderate">Moderate</span>
+                    </div>
+                    <p class="card-title">Air Quality Index</p>
+                    <div class="card-value">156</div>
+                    <div class="aqi-indicator">
+                        <div class="aqi-bar">
+                            <div class="aqi-marker" style="left: 45%;"></div>
+                        </div>
+                    </div>
+                    <p class="mt-md" style="font-size: 0.875rem;">Sensitive groups should reduce outdoor activity</p>
+                </div>
+
+                <!-- Metro Countdown -->
+                <div class="glass-card dashboard-card">
+                    <div class="card-header">
+                        <div class="card-icon">🚇</div>
+                        <span style="font-size: 0.875rem; color: var(--text-muted);">Live</span>
+                    </div>
+                    <p class="card-title">Next Metro</p>
+                    <div class="metro-countdown">
+                        <div class="metro-line">
+                            <div class="metro-line-badge blue"></div>
+                            <span class="metro-line-name">Blue Line</span>
+                            <span class="metro-eta" data-mins="3">3 min</span>
+                        </div>
+                        <div class="metro-line">
+                            <div class="metro-line-badge yellow"></div>
+                            <span class="metro-line-name">Yellow Line</span>
+                            <span class="metro-eta" data-mins="5">5 min</span>
+                        </div>
+                        <div class="metro-line">
+                            <div class="metro-line-badge magenta"></div>
+                            <span class="metro-line-name">Magenta Line</span>
+                            <span class="metro-eta" data-mins="8">8 min</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Traffic Heatmap - SVG Demo -->
+                <div class="glass-card dashboard-card">
+                    <div class="card-header">
+                        <div class="card-icon">🚗</div>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">Live</span>
+                    </div>
+                    <p class="card-title">Traffic Overview - Delhi</p>
+
+
+                </div>
+
+                <!-- Rain Alert -->
+                <div class="glass-card dashboard-card">
+                    <div class="card-header">
+                        <div class="card-icon">🌧️</div>
+                    </div>
+                    <p class="card-title">Rain Forecast</p>
+                    <div class="card-value" style="color: #22c55e;">No Rain</div>
+                    <p>Clear skies expected for the next 6 hours</p>
+                    <div class="mt-lg" style="display: flex; gap: 0.5rem;">
+                        <span
+                            style="padding: 0.25rem 0.75rem; background: rgba(34, 197, 94, 0.2); border-radius: 9999px; font-size: 0.875rem;">✓
+                            Carry umbrella: No</span>
+                    </div>
+                </div>
+
+                <!-- City Mood -->
+                <div class="glass-card dashboard-card">
+                    <div class="card-header">
+                        <div class="card-icon mood-indicator"
+                            style="background: linear-gradient(135deg, #f59e0b, #ef4444);">😊</div>
+                    </div>
+                    <p class="card-title">City Mood</p>
+                    <div class="card-value">Busy</div>
+                    <p>Evening rush - people heading home from work</p>
+                    <div class="mt-md" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <span
+                            style="padding: 0.25rem 0.75rem; background: rgba(59, 130, 246, 0.1); border-radius: 9999px; font-size: 0.75rem;">#DelhiDiaries</span>
+                        <span
+                            style="padding: 0.25rem 0.75rem; background: rgba(59, 130, 246, 0.1); border-radius: 9999px; font-size: 0.75rem;">#WeekendVibes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Crowd Predictor Section -->
+    <section class="crowd-section" style="padding: var(--space-2xl);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Crowd & Rush <span class="text-gradient">Predictor</span></h2>
+                <p>Know before you go - real-time crowd levels</p>
+            </div>
+
+            <div class="crowd-grid">
+                <div class="glass-card crowd-card">
+                    <div class="crowd-indicator high" data-level="high">🛍️</div>
+                    <h4>Select Citywalk</h4>
+                    <p class="crowd-level-text">High Crowd</p>
+                    <p class="crowd-prediction">Best time: 11 AM - 1 PM</p>
+                </div>
+
+                <div class="glass-card crowd-card">
+                    <div class="crowd-indicator very-high" data-level="very_high">🚇</div>
+                    <h4>Rajiv Chowk Metro</h4>
+                    <p class="crowd-level-text">Very High</p>
+                    <p class="crowd-prediction">Best time: 11 AM - 4 PM</p>
+                </div>
+
+                <div class="glass-card crowd-card">
+                    <div class="crowd-indicator moderate" data-level="moderate">🛕</div>
+                    <h4>Akshardham Temple</h4>
+                    <p class="crowd-level-text">Moderate</p>
+                    <p class="crowd-prediction">Best time: 3 PM - 5 PM</p>
+                </div>
+
+                <div class="glass-card crowd-card">
+                    <div class="crowd-indicator high" data-level="high">🏪</div>
+                    <h4>Chandni Chowk</h4>
+                    <p class="crowd-level-text">High Crowd</p>
+                    <p class="crowd-prediction">Best time: 9 AM - 10 AM</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Local Essentials Section -->
+    <section class="essentials-section" style="padding: var(--space-2xl); background: var(--card-bg);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Local <span class="text-gradient">Essentials</span> Finder</h2>
+                <p>Find what you need, when you need it</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="glass-card" style="cursor: pointer;">
+                    <div class="flex items-center gap-md">
+                        <div class="card-icon">🏥</div>
+                        <div>
+                            <h4>Hospitals</h4>
+                            <p style="margin: 0;">Nearest: AIIMS (2.3 km)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card" style="cursor: pointer;">
+                    <div class="flex items-center gap-md">
+                        <div class="card-icon">💊</div>
+                        <div>
+                            <h4>24×7 Pharmacies</h4>
+                            <p style="margin: 0;">Nearest: Apollo (0.8 km)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card" style="cursor: pointer;">
+                    <div class="flex items-center gap-md">
+                        <div class="card-icon">⚡</div>
+                        <div>
+                            <h4>EV Charging</h4>
+                            <p style="margin: 0;">2 available nearby</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card" style="cursor: pointer;">
+                    <div class="flex items-center gap-md">
+                        <div class="card-icon">🏧</div>
+                        <div>
+                            <h4>ATMs</h4>
+                            <p style="margin: 0;">5 within 500m</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card" style="cursor: pointer;">
+                    <div class="flex items-center gap-md">
+                        <div class="card-icon">👮</div>
+                        <div>
+                            <h4>Police Stations</h4>
+                            <p style="margin: 0;">Nearest: 0.7 km</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card" style="cursor: pointer;">
+                    <div class="flex items-center gap-md">
+                        <div class="card-icon">⛽</div>
+                        <div>
+                            <h4>Petrol Pumps</h4>
+                            <p style="margin: 0;">3 within 1 km</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Actions -->
+    <section style="padding: var(--space-2xl);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Quick <span class="text-gradient">Actions</span></h2>
+            </div>
+
+            <div class="flex gap-lg justify-center" style="flex-wrap: wrap;">
+                <a href="transport.html" class="btn btn-primary">
+                    <i data-lucide="train"></i>
+                    Plan Route
+                </a>
+                <a href="events.html" class="btn btn-secondary">
+                    <i data-lucide="calendar"></i>
+                    View Events
+                </a>
+                <a href="map.html" class="btn btn-secondary">
+                    <i data-lucide="alert-triangle"></i>
+                    Report Issue
+                </a>
+                <a href="budget.html" class="btn btn-secondary">
+                    <i data-lucide="wallet"></i>
+                    Budget Planner
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="padding: var(--space-2xl); background: var(--card-bg); text-align: center;">
+        <div class="container">
+            <div class="nav-logo" style="justify-content: center; margin-bottom: var(--space-lg);">
+                <div class="logo-icon">🌆</div>
+                <span>CitySphere</span>
+            </div>
+            <p style="max-width: 500px; margin: 0 auto var(--space-lg);">
+                Your smart companion for navigating Indian cities. Real-time data, AI insights, and seamless
+                experiences.
+            </p>
+            <div class="flex gap-lg justify-center" style="margin-bottom: var(--space-lg);">
+                <a href="#">About</a>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Contact</a>
+                <a href="#">API</a>
+            </div>
+            <p style="font-size: 0.875rem; color: var(--text-muted);">
+                © 2025 CitySphere. Made with ❤️ for Indian Cities.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts/main.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

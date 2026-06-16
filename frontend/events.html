@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="day">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CitySphere Events - Discover concerts, festivals, workshops, and more in Delhi">
+    <title>City Events | CitySphere</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="glass-nav">
+        <div class="navbar">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon"><img src="/CitySphere/frontend/images/icon.png" alt="CitySphere logo"></div>
+                <span>CitySphere</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="transport.html">Transport</a></li>
+                <li><a href="events.html" class="active">Events</a></li>
+                <li><a href="map.html">City Map</a></li>
+                <li><a href="budget.html">Budget</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button class="theme-toggle">🌙</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" style="min-height: 50vh;">
+        <div class="container">
+            <div class="section-header" style="text-align: left;">
+                <h1>City <span class="text-gradient">Events</span> Radar</h1>
+                <p>Discover concerts, workshops, festivals, and more happening around you</p>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="flex gap-md" style="flex-wrap: wrap;">
+                <button class="btn btn-primary" data-filter="all">All Events</button>
+                <button class="btn btn-secondary" data-filter="concert">🎵 Concerts</button>
+                <button class="btn btn-secondary" data-filter="festival">🎉 Festivals</button>
+                <button class="btn btn-secondary" data-filter="food">🍕 Food</button>
+                <button class="btn btn-secondary" data-filter="workshop">📚 Workshops</button>
+                <button class="btn btn-secondary" data-filter="standup">😂 Stand-up</button>
+                <button class="btn btn-secondary" data-filter="theater">🎭 Theater</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Grid -->
+    <section class="events-section">
+        <div class="events-grid">
+            <!-- Event Card 1 -->
+            <article class="glass-card event-card">
+                <img src="https://images.unsplash.com/photo-1565123409695-7b5ef63a2efb?w=800" alt="Food Festival"
+                    class="event-image">
+                <div class="event-content">
+                    <span class="event-category">🍕 Food</span>
+                    <h3 class="event-title">Delhi Food Truck Festival 2024</h3>
+                    <p>50+ gourmet food trucks, live music, and entertainment!</p>
+                    <div class="event-meta">
+                        <span>📅 Dec 10-12</span>
+                        <span>📍 JLN Stadium</span>
+                    </div>
+                    <div class="mt-md flex gap-sm">
+                        <span
+                            style="background: var(--primary); color: white; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem;">₹499+</span>
+                        <span
+                            style="background: rgba(34, 197, 94, 0.2); color: #22c55e; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem;">Featured</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Event Card 2 -->
+            <article class="glass-card event-card">
+                <img src="https://images.unsplash.com/photo-1527224538127-2104bb71c51b?w=800" alt="Comedy Night"
+                    class="event-image">
+                <div class="event-content">
+                    <span class="event-category">😂 Standup</span>
+                    <h3 class="event-title">Stand-Up Comedy Night</h3>
+                    <p>An evening of laughter with India's top comedians!</p>
+                    <div class="event-meta">
+                        <span>📅 Dec 14</span>
+                        <span>📍 Canvas Laugh Club</span>
+                    </div>
+                    <div class="mt-md flex gap-sm">
+                        <span
+                            style="background: var(--primary); color: white; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem;">₹799+</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Event Card 3 -->
+            <article class="glass-card event-card">
+                <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?w=800" alt="Arts Festival"
+                    class="event-image">
+                <div class="event-content">
+                    <span class="event-category">🎉 Festival</span>
+                    <h3 class="event-title">Delhi International Arts Festival</h3>
+                    <p>Week-long celebration of classical dance, music, and theater</p>
+                    <div class="event-meta">
+                        <span>📅 Dec 20-27</span>
+                        <span>📍 India Habitat Centre</span>
+                    </div>
+                    <div class="mt-md flex gap-sm">
+                        <span
+                            style="background: var(--primary); color: white; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem;">₹200+</span>
+                        <span
+                            style="background: rgba(34, 197, 94, 0.2); color: #22c55e; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem;">Featured</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Event Card 4 -->
+            <article class="glass-card event-card">
+                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800" alt="Tech Summit"
+                    class="event-image">
+                <div class="event-content">
+                    <span class="event-category">📚 Workshop</span>
+                    <h3 class="event-title">Tech Startup Summit Delhi</h3>
+                    <p>Connect with entrepreneurs, investors, and tech enthusiasts</p>
+                    <div class="event-meta">
+                        <span>📅 Dec 16</span>
+                        <span>📍 Pragati Maidan</span>
+                    </div>
+                    <div class="mt-md flex gap-sm">
+                        <span
+                            style="background: var(--primary); color: white; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem;">₹1999+</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Event Card 5 -->
+            <article class="glass-card event-card">
+                <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800" alt="Music Fest"
+                    class="event-image">
+                <div class="event-content">
+                    <span class="event-category">🎵 Concert</span>
+                    <h3 class="event-title">Indie Music Fest</h3>
+                    <p>Underground sounds with emerging artists from across India</p>
+                    <div class="event-meta">
+                        <span>📅 Dec 11</span>
+                        <span>📍 Hauz Khas Social</span>
+                    </div>
+                    <div class="mt-md flex gap-sm">
+                        <span
+                            style="background: var(--primary); color: white; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem;">₹599+</span>
+                        <span
+                            style="background: rgba(34, 197, 94, 0.2); color: #22c55e; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem;">Featured</span>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Event Card 6 -->
+            <article class="glass-card event-card">
+                <img src="https://images.unsplash.com/photo-1503095396549-807759245b35?w=800" alt="Theater"
+                    class="event-image">
+                <div class="event-content">
+                    <span class="event-category">🎭 Theater</span>
+                    <h3 class="event-title">A Midsummer Night's Dream</h3>
+                    <p>Shakespeare's comedy performed under the stars at Purana Qila</p>
+                    <div class="event-meta">
+                        <span>📅 Dec 15</span>
+                        <span>📍 Purana Qila</span>
+                    </div>
+                    <div class="mt-md flex gap-sm">
+                        <span
+                            style="background: var(--primary); color: white; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem;">₹500+</span>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Festival Guide Section -->
+    <section style="padding: var(--space-2xl); background: var(--card-bg);">
+        <div class="container">
+            <div class="section-header">
+                <h2>Festival <span class="text-gradient">Guide</span></h2>
+                <p>Upcoming festivals and celebrations</p>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="glass-card">
+                    <div class="flex items-center gap-md">
+                        <div style="font-size: 2.5rem;">🪔</div>
+                        <div>
+                            <h4>Diwali Celebrations</h4>
+                            <p style="margin: 0; font-size: 0.875rem;">Best spots: India Gate, Connaught Place</p>
+                            <p style="margin: 0; color: #f59e0b; font-size: 0.75rem;">⚠️ High traffic expected</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <div class="flex items-center gap-md">
+                        <div style="font-size: 2.5rem;">🎄</div>
+                        <div>
+                            <h4>Christmas Markets</h4>
+                            <p style="margin: 0; font-size: 0.875rem;">Best spots: Select City, CP, Khan Market</p>
+                            <p style="margin: 0; color: #22c55e; font-size: 0.75rem;">✓ Moderate crowd expected</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <div class="flex items-center gap-md">
+                        <div style="font-size: 2.5rem;">🎆</div>
+                        <div>
+                            <h4>New Year Eve</h4>
+                            <p style="margin: 0; font-size: 0.875rem;">Best spots: CP, Hauz Khas, Aerocity</p>
+                            <p style="margin: 0; color: #ef4444; font-size: 0.75rem;">🚫 Route closures expected</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="padding: var(--space-xl); text-align: center;">
+        <p>© 2025 CitySphere. Made with ❤️ for Indian Cities.</p>
+    </footer>
+    <script src="scripts/main.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+
+</html>

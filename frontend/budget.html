@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="day">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CitySphere Budget - Plan your monthly expenses in Delhi">
+    <title>Budget Planner | CitySphere</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="glass-nav">
+        <div class="navbar">
+            <a href="index.html" class="nav-logo">
+                <div class="logo-icon"><img src="/CitySphere/frontend/images/icon.png" alt="CitySphere logo"></div>
+                <span>CitySphere</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="transport.html">Transport</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="map.html">City Map</a></li>
+                <li><a href="budget.html" class="active">Budget</a></li>
+            </ul>
+            <div class="nav-actions"><button class="theme-toggle">🌙</button></div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero" style="min-height: 40vh;">
+        <div class="container">
+            <h1>Visual <span class="text-gradient">Budget</span> Planner</h1>
+            <p>Estimate your monthly living costs in Delhi NCR</p>
+        </div>
+    </section>
+
+    <!-- Budget Calculator -->
+    <section style="padding: var(--space-2xl);">
+        <div class="container">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 1200px; margin: 0 auto;">
+                <!-- Sliders -->
+                <div class="glass-card budget-sliders">
+                    <h3 class="mb-lg">Monthly Expenses</h3>
+
+                    <div class="slider-group mb-lg">
+                        <div class="slider-header">
+                            <span class="slider-label">🏠 Rent</span>
+                            <span class="slider-value" data-display="rent">₹15,000</span>
+                        </div>
+                        <input type="range" class="budget-slider" data-category="rent" min="5000" max="50000"
+                            value="15000" step="1000">
+                        <div class="flex justify-between" style="font-size: 0.75rem; color: var(--text-muted);">
+                            <span>PG/Sharing</span>
+                            <span>Premium</span>
+                        </div>
+                    </div>
+
+                    <div class="slider-group mb-lg">
+                        <div class="slider-header">
+                            <span class="slider-label">🍕 Food</span>
+                            <span class="slider-value" data-display="food">₹8,000</span>
+                        </div>
+                        <input type="range" class="budget-slider" data-category="food" min="3000" max="25000"
+                            value="8000" step="500">
+                        <div class="flex justify-between" style="font-size: 0.75rem; color: var(--text-muted);">
+                            <span>Home cook</span>
+                            <span>Eating out</span>
+                        </div>
+                    </div>
+
+                    <div class="slider-group mb-lg">
+                        <div class="slider-header">
+                            <span class="slider-label">🚇 Commute</span>
+                            <span class="slider-value" data-display="commute">₹3,000</span>
+                        </div>
+                        <input type="range" class="budget-slider" data-category="commute" min="500" max="15000"
+                            value="3000" step="500">
+                        <div class="flex justify-between" style="font-size: 0.75rem; color: var(--text-muted);">
+                            <span>Metro only</span>
+                            <span>Cab daily</span>
+                        </div>
+                    </div>
+
+                    <div class="slider-group mb-lg">
+                        <div class="slider-header">
+                            <span class="slider-label">⚡ Utilities</span>
+                            <span class="slider-value" data-display="utilities">₹2,000</span>
+                        </div>
+                        <input type="range" class="budget-slider" data-category="utilities" min="1000" max="8000"
+                            value="2000" step="500">
+                        <div class="flex justify-between" style="font-size: 0.75rem; color: var(--text-muted);">
+                            <span>Basic</span>
+                            <span>AC + WiFi</span>
+                        </div>
+                    </div>
+
+                    <div class="slider-group">
+                        <div class="slider-header">
+                            <span class="slider-label">🎬 Entertainment</span>
+                            <span class="slider-value" data-display="entertainment">₹5,000</span>
+                        </div>
+                        <input type="range" class="budget-slider" data-category="entertainment" min="0" max="20000"
+                            value="5000" step="500">
+                        <div class="flex justify-between" style="font-size: 0.75rem; color: var(--text-muted);">
+                            <span>Minimal</span>
+                            <span>Active social</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chart & Total -->
+                <div>
+                    <div class="glass-card" style="text-align: center;">
+                        <h3>Monthly Total</h3>
+                        <div
+                            style="font-family: var(--font-display); font-size: 4rem; font-weight: 800; color: var(--primary);">
+                            ₹<span class="budget-total">33,000</span>
+                        </div>
+                        <p>per month in Delhi NCR</p>
+                    </div>
+
+                    <div class="glass-card mt-lg">
+                        <h4 class="mb-lg">Expense Breakdown</h4>
+                        <canvas id="budgetChart" height="250"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cost Comparison -->
+    <section style="padding: var(--space-2xl); background: var(--card-bg);">
+        <div class="container">
+            <h2 class="section-header">Compare <span class="text-gradient">Neighborhoods</span></h2>
+
+            <div class="dashboard-grid">
+                <div class="glass-card">
+                    <h4>🌆 South Delhi</h4>
+                    <p>(Saket, GK, Hauz Khas)</p>
+                    <div style="margin-top: 1rem;">
+                        <div class="flex justify-between mb-sm"><span>Rent (1BHK)</span><span
+                                style="font-weight: 700;">₹25,000-40,000</span></div>
+                        <div class="flex justify-between mb-sm"><span>Meal out</span><span
+                                style="font-weight: 700;">₹400-800</span></div>
+                        <div class="flex justify-between"><span>Vibe</span><span>🌟🌟🌟🌟🌟</span></div>
+                    </div>
+                    <span
+                        style="display: inline-block; margin-top: 1rem; padding: 0.25rem 0.75rem; background: rgba(239, 68, 68, 0.2); color: #ef4444; border-radius: 9999px; font-size: 0.75rem;">Premium</span>
+                </div>
+
+                <div class="glass-card">
+                    <h4>🏢 Central Delhi</h4>
+                    <p>(CP, Karol Bagh)</p>
+                    <div style="margin-top: 1rem;">
+                        <div class="flex justify-between mb-sm"><span>Rent (1BHK)</span><span
+                                style="font-weight: 700;">₹18,000-30,000</span></div>
+                        <div class="flex justify-between mb-sm"><span>Meal out</span><span
+                                style="font-weight: 700;">₹300-600</span></div>
+                        <div class="flex justify-between"><span>Vibe</span><span>🌟🌟🌟🌟</span></div>
+                    </div>
+                    <span
+                        style="display: inline-block; margin-top: 1rem; padding: 0.25rem 0.75rem; background: rgba(234, 179, 8, 0.2); color: #eab308; border-radius: 9999px; font-size: 0.75rem;">Moderate</span>
+                </div>
+
+                <div class="glass-card">
+                    <h4>🌳 East Delhi / Noida</h4>
+                    <p>(Mayur Vihar, Noida Sec 18)</p>
+                    <div style="margin-top: 1rem;">
+                        <div class="flex justify-between mb-sm"><span>Rent (1BHK)</span><span
+                                style="font-weight: 700;">₹12,000-20,000</span></div>
+                        <div class="flex justify-between mb-sm"><span>Meal out</span><span
+                                style="font-weight: 700;">₹200-400</span></div>
+                        <div class="flex justify-between"><span>Vibe</span><span>🌟🌟🌟</span></div>
+                    </div>
+                    <span
+                        style="display: inline-block; margin-top: 1rem; padding: 0.25rem 0.75rem; background: rgba(34, 197, 94, 0.2); color: #22c55e; border-radius: 9999px; font-size: 0.75rem;">Budget
+                        Friendly</span>
+                </div>
+
+                <div class="glass-card">
+                    <h4>🏘️ North Campus</h4>
+                    <p>(GTB Nagar, Kamla Nagar)</p>
+                    <div style="margin-top: 1rem;">
+                        <div class="flex justify-between mb-sm"><span>PG Room</span><span
+                                style="font-weight: 700;">₹8,000-15,000</span></div>
+                        <div class="flex justify-between mb-sm"><span>Meal out</span><span
+                                style="font-weight: 700;">₹100-250</span></div>
+                        <div class="flex justify-between"><span>Vibe</span><span>🌟🌟🌟🌟</span></div>
+                    </div>
+                    <span
+                        style="display: inline-block; margin-top: 1rem; padding: 0.25rem 0.75rem; background: rgba(59, 130, 246, 0.2); color: #3b82f6; border-radius: 9999px; font-size: 0.75rem;">Student
+                        Friendly</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tips -->
+    <section style="padding: var(--space-2xl);">
+        <div class="container">
+            <h2 class="section-header">Money Saving <span class="text-gradient">Tips</span></h2>
+
+            <div class="dashboard-grid" style="max-width: 1000px; margin: 0 auto;">
+                <div class="glass-card">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎫</div>
+                    <h4>Get Metro Card</h4>
+                    <p style="margin: 0;">Save 10% on every metro ride with smart card</p>
+                </div>
+
+                <div class="glass-card">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🍱</div>
+                    <h4>Tiffin Services</h4>
+                    <p style="margin: 0;">₹3,500/month for 2 meals - cheaper than eating out</p>
+                </div>
+
+                <div class="glass-card">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🏠</div>
+                    <h4>Co-living Spaces</h4>
+                    <p style="margin: 0;">All-inclusive with WiFi, cleaning, food from ₹12,000</p>
+                </div>
+
+                <div class="glass-card">
+                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎬</div>
+                    <h4>Student Discounts</h4>
+                    <p style="margin: 0;">Use student ID for movie, event, and food discounts</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: var(--space-xl); text-align: center;">
+        <p>© 2025 CitySphere. Made with ❤️ for Indian Cities.</p>
+    </footer>
+    <script src="scripts/main.js"></script>
+    <script>
+        lucide.createIcons();
+
+        // Initialize Chart
+        const ctx = document.getElementById('budgetChart').getContext('2d');
+        const budgetChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Rent', 'Food', 'Commute', 'Utilities', 'Entertainment'],
+                datasets: [{
+                    data: [15000, 8000, 3000, 2000, 5000],
+                    backgroundColor: ['#3b82f6', '#f59e0b', '#22c55e', '#a855f7', '#ec4899'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'bottom' }
+                }
+            }
+        });
+
+        // Update chart on slider change
+        document.querySelectorAll('.budget-slider').forEach(slider => {
+            slider.addEventListener('input', (e) => {
+                const category = e.target.dataset.category;
+                const value = parseInt(e.target.value);
+
+                // Update display
+                const display = document.querySelector(`[data-display="${category}"]`);
+                if (display) display.textContent = `₹${value.toLocaleString()}`;
+
+                // Update chart
+                const categoryIndex = { rent: 0, food: 1, commute: 2, utilities: 3, entertainment: 4 };
+                budgetChart.data.datasets[0].data[categoryIndex[category]] = value;
+                budgetChart.update();
+
+                // Update total
+                const total = budgetChart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                document.querySelector('.budget-total').textContent = total.toLocaleString();
+            });
+        });
+    </script>
+</body>
+
+</html>

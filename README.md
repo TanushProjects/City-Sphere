@@ -1,140 +1,228 @@
-# 🌆 CitySphere — Smart City Digital Twin
+# 🌆 City Sphere 2.0 — AI-Powered Smart City Digital Twin
 
 <p align="center">
-    <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5">
-    <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3">
-    <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript">
-    <img src="https://img.shields.io/badge/GSAP-88CE02?style=for-the-badge&logo=greensock&logoColor=white" alt="GSAP">
+  <img src="https://img.shields.io/badge/React_19-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React">
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Fastify-000000?style=for-the-badge&logo=fastify&logoColor=white" alt="Fastify">
+  <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB">
+  <img src="https://img.shields.io/badge/Gemini_AI-8E75B2?style=for-the-badge&logo=google&logoColor=white" alt="Gemini AI">
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite">
 </p>
 
-CitySphere is a frontend-only, animated digital twin demo for Indian cities (demo data for Delhi). It provides a live dashboard, transport planner, events radar, crowd prediction, civic issue reporting, interactive map and a budget planner — all without a backend (mock data only).
-
-Quick links
-- Demo data: Delhi (mock)
-- No API keys required for maps (Leaflet + OpenStreetMap)
-
-## Key Features
-
-- Live city dashboard: weather, AQI, traffic heatmap, metro countdown, animated gradients
-- Smart transport & route planner: bus/metro comparisons, fastest vs cheapest routes, travel-time estimates
-- City events radar: filterable events, flying-card animations
-- Crowd & rush predictor: mall/metro/market crowd levels, best-visit suggestions
-- Civic issue reporting: potholes, garbage, streetlight reports saved to localStorage
-- Interactive city map: 60+ Delhi locations, filters (Landmarks, Metro, Hospitals, Food, Shopping, Temples, Parks), directions
-- Visual budget planner: sliders for rent/food/commute, animated charts
-
-## Tech Stack
-
-- Frontend: HTML5, CSS3, JavaScript (ES6+)
-- Styling: Tailwind CSS + custom CSS variables
-- Animations: GSAP (ScrollTrigger)
-- Maps: Leaflet + OpenStreetMap (FREE — no API key)
-- Charts: Chart.js
-- Icons: Lucide
-
-## Project Structure
-
-```
-CitySphere/
-├── frontend/
-│   ├── index.html          # Dashboard
-│   ├── events.html         # Events radar
-│   ├── transport.html      # Route planner
-│   ├── map.html            # City map & issues
-│   ├── budget.html         # Budget planner
-│   ├── scripts/
-│   │   └── main.js         # Core JS with mock data
-│   └── styles/
-│       └── style.css       # Main stylesheet
-├── README.md
-├── DEPLOYMENT.md
-└── ADDING_DATA.md
-```
-
-## Quick Start
-
-Recommended: VS Code Live Server
-
-1. Open the `frontend` folder in VS Code  
-2. Install "Live Server" extension  
-3. Right-click `index.html` → "Open with Live Server"
-
-Other options:
-
-- Using a static server:
-    ```bash
-    cd frontend
-    npx serve .
-    # or
-    python -m http.server 3000
-    ```
-- Direct browser: double-click `frontend/index.html`
-
-## Map & Data
-
-Map implementation: Leaflet + OpenStreetMap (no API key).
-
-Included Delhi locations (sample counts):
-- Landmarks: 15+
-- Hospitals: 6+
-- Metro stations: 6+
-- Food spots: 6+
-- Shopping areas: 6+
-- Temples: 6+
-- Parks: 6+
-
-To add or edit locations, see ADDING_DATA.md or update `delhiLocations` in `frontend/scripts/main.js`:
-
-```javascript
-const MapManager = {
-    delhiLocations: {
-        landmarks: [
-            {
-                name: 'Your Place',
-                lat: 28.1234,
-                lng: 77.5678,
-                icon: '🏛️',
-                address: 'Full Address',
-                description: 'Brief description'
-            },
-            // ...
-        ],
-        // other categories...
-    }
-};
-```
-
-## Design System
-
-- Themes: Day (light) & Night (dark with neon accents)
-- Animations: GSAP scroll-triggered, hover micro-interactions, flying cards, pulsating indicators
-- Components: glassmorphism cards, gradient text, 3D hover transforms, animated charts
-- Responsive: Desktop (full layout), Tablet (stacked grid), Mobile (single-column)
-
-## Data & Persistence
-
-- All data is mock/demo and stored client-side
-- Civic reports persist to browser localStorage
-- No server or database required
-
-## Contribute
-
-- Add locations or events via ADDING_DATA.md
-- Keep changes confined to frontend files when testing locally
-
-## License
-
-MIT License — free to use and adapt.
-
-## Acknowledgments
-
-- OpenStreetMap & Leaflet for maps
-- GreenSock (GSAP) for animations
-- Chart.js for charts
-- Unsplash for images
-- Lucide for icons
+**City Sphere 2.0** is a full-stack, AI-powered smart city dashboard for Indian cities (demo data for Delhi). It features a React + TypeScript frontend, a Fastify REST API backend, MongoDB Atlas for persistence, and a Gemini AI assistant with real tool-calling capabilities.
 
 ---
 
-Made with ❤️ for Indian cities
+## ✨ Features
 
+- 🏙️ **Live City Dashboard** — Real-time weather, AQI, traffic, and metro data
+- 🚇 **Smart Transport Planner** — Bus/metro comparisons, route optimization
+- 📅 **City Events Radar** — Filterable events with animations
+- 🗺️ **Interactive City Map** — 60+ Delhi locations (Landmarks, Metro, Hospitals, Food, Parks, Temples)
+- 🏛️ **Civic Issue Reporting** — Report potholes, garbage, streetlights — persisted to DB
+- 💰 **Visual Budget Planner** — Animated charts for rent/food/commute planning
+- 🤖 **Gemini AI Assistant** — Context-aware city assistant with tool-calling (weather, transport, events, places)
+- 🔐 **Auth System** — JWT-based registration & login
+
+---
+
+## 🏗️ Tech Stack
+
+### Frontend (`/client`)
+| Technology | Purpose |
+|---|---|
+| React 19 + TypeScript | UI Framework |
+| Vite 8 | Build Tool & Dev Server |
+| Tailwind CSS 3 | Styling |
+| Framer Motion | Animations |
+| Zustand | State Management |
+| React Router DOM 7 | Routing |
+| Leaflet + React-Leaflet | Interactive Maps |
+| Chart.js + react-chartjs-2 | Data Visualizations |
+| Radix UI | Accessible UI Components |
+| Axios | HTTP Client |
+| Lucide React | Icons |
+
+### Backend (`/server`)
+| Technology | Purpose |
+|---|---|
+| Fastify 5 | REST API Framework |
+| TypeScript 6 | Type Safety |
+| MongoDB + Mongoose | Database |
+| `@fastify/jwt` | Authentication |
+| `@fastify/cors` | Cross-Origin Resource Sharing |
+| `@fastify/rate-limit` | API Rate Limiting |
+| Google Generative AI SDK | Gemini AI Integration |
+| bcryptjs | Password Hashing |
+| Zod | Request Validation |
+| dotenv | Environment Management |
+
+---
+
+## 📁 Project Structure
+
+```
+city-sphere/
+├── client/                        # React + TypeScript frontend
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── auth/              # AuthModal (login/register)
+│   │   │   ├── layout/            # Sidebar, ThemeToggle
+│   │   │   └── ui/                # GlassCard, PageHeader, StatWidget
+│   │   ├── pages/
+│   │   │   ├── DashboardPage.tsx  # Main city overview
+│   │   │   ├── MapPage.tsx        # Interactive Leaflet map
+│   │   │   ├── TransportPage.tsx  # Route planner
+│   │   │   ├── EventsPage.tsx     # City events
+│   │   │   ├── CivicPage.tsx      # Issue reporting
+│   │   │   ├── BudgetPage.tsx     # Budget planner
+│   │   │   └── AssistantPage.tsx  # Gemini AI chat
+│   │   ├── store/                 # Zustand global state
+│   │   ├── lib/                   # API client, utils, mock data
+│   │   └── types/                 # Shared TypeScript types
+│   ├── public/
+│   └── vite.config.ts
+│
+├── server/                        # Fastify REST API
+│   ├── src/
+│   │   ├── config/
+│   │   │   ├── index.ts           # App config (env vars)
+│   │   │   └── database.ts        # MongoDB connection
+│   │   ├── routes/
+│   │   │   ├── auth.ts            # POST /api/auth/register, /login
+│   │   │   ├── weather.ts         # GET /api/weather
+│   │   │   ├── transport.ts       # GET /api/transport
+│   │   │   ├── events.ts          # GET/POST /api/events
+│   │   │   ├── budget.ts          # GET/POST /api/budget
+│   │   │   ├── complaints.ts      # GET/POST /api/complaints
+│   │   │   └── chat.ts            # POST /api/chat (AI)
+│   │   ├── models/                # Mongoose schemas (User, Event, etc.)
+│   │   ├── middleware/            # Auth, validation
+│   │   ├── services/ai/           # Gemini agent + tool registry
+│   │   ├── seeds/                 # Database seed script
+│   │   └── app.ts                 # Fastify app entry point
+│   ├── .env.example               # Environment variable template
+│   └── tsconfig.json
+│
+├── frontend/                      # Legacy static HTML version (v1)
+├── .gitignore
+├── package.json                   # Root orchestrator scripts
+└── README.md
+```
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- **Node.js** 18+
+- **MongoDB** (local) or a free [MongoDB Atlas](https://cloud.mongodb.com) cluster
+- **Gemini API Key** — get one free at [aistudio.google.com](https://aistudio.google.com/apikey)
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/TanushProjects/City-Sphere.git
+cd City-Sphere
+```
+
+### 2. Install all dependencies
+```bash
+npm run install:all
+```
+
+### 3. Set up environment variables
+```bash
+# Copy the template
+copy server\.env.example server\.env
+```
+
+Then edit `server/.env` with your real values:
+```env
+PORT=5001
+MONGODB_URI=mongodb+srv://<user>:<password>@<cluster>.mongodb.net/citysphere
+JWT_SECRET=your_strong_random_secret_here
+GEMINI_API_KEY=your_gemini_api_key_here
+CORS_ORIGINS=http://localhost:5173,http://localhost:3000
+```
+
+### 4. Run the development servers
+```bash
+npm run dev
+```
+
+This starts both servers concurrently:
+| Service | URL |
+|---|---|
+| 🌐 Frontend (Vite) | http://localhost:5173 |
+| ⚡ Backend (Fastify) | http://localhost:5001 |
+
+### 5. (Optional) Seed the database
+```bash
+npm run seed
+```
+
+---
+
+## 📜 Available Scripts
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start both client and server in dev mode |
+| `npm run dev:client` | Start only the Vite frontend |
+| `npm run dev:server` | Start only the Fastify backend |
+| `npm run build` | Build both client and server for production |
+| `npm run install:all` | Install dependencies for client and server |
+| `npm run seed` | Seed the MongoDB database with demo data |
+
+---
+
+## 🔌 API Endpoints
+
+| Method | Endpoint | Description | Auth |
+|---|---|---|---|
+| POST | `/api/auth/register` | Create account | ❌ |
+| POST | `/api/auth/login` | Login & get JWT | ❌ |
+| GET | `/api/weather` | Live weather data | ❌ |
+| GET | `/api/transport/metro` | Metro station data | ❌ |
+| GET | `/api/events` | City events list | ❌ |
+| POST | `/api/events` | Create event | ✅ |
+| GET | `/api/budget` | User budget data | ✅ |
+| POST | `/api/budget` | Save budget | ✅ |
+| GET | `/api/complaints` | Civic reports | ❌ |
+| POST | `/api/complaints` | File a complaint | ✅ |
+| POST | `/api/chat` | AI assistant chat | ✅ |
+
+---
+
+## 🔐 Security
+
+- Passwords hashed with **bcryptjs**
+- JWT tokens for authenticated routes
+- Rate limiting on all API routes
+- Environment secrets never hardcoded — loaded via `.env`
+- `.env` is gitignored — see `server/.env.example` for the template
+
+---
+
+## 🤖 AI Assistant
+
+The Gemini AI assistant uses **tool-calling** with these registered tools:
+
+| Tool | What it does |
+|---|---|
+| `get_weather` | Fetches live weather & AQI for Delhi |
+| `plan_route` | Suggests optimal metro/bus routes |
+| `search_events` | Finds upcoming city events |
+| `analyze_budget` | Helps with cost-of-living breakdown |
+| `file_complaint` | Submits a civic issue on your behalf |
+| `find_places` | Locates hospitals, parks, food spots, etc. |
+
+---
+
+## 📄 License
+
+MIT License — free to use and adapt.
+
+---
+
+<p align="center">Made with ❤️ for Indian cities · City Sphere 2.0</p>

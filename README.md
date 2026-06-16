@@ -1,4 +1,4 @@
-# 🌆 City Sphere 2.0 — AI-Powered Smart City Digital Twin
+# 🌆 City Sphere — AI-Powered Smart City Digital Twin
 
 <p align="center">
   <img src="https://img.shields.io/badge/React_19-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React">
@@ -9,7 +9,7 @@
   <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite">
 </p>
 
-**City Sphere 2.0** is a full-stack, AI-powered smart city dashboard for Indian cities (demo data for Delhi). It features a React + TypeScript frontend, a Fastify REST API backend, MongoDB Atlas for persistence, and a Gemini AI assistant with real tool-calling capabilities.
+**City Sphere** is a full-stack, AI-powered smart city dashboard for Indian cities (demo data for Delhi). It features a React + TypeScript frontend, a Fastify REST API backend, MongoDB Atlas for persistence, and a Gemini AI assistant with real tool-calling capabilities.
 
 ---
 
@@ -225,4 +225,4 @@ MIT License — free to use and adapt.
 
 ---
 
-<p align="center">Made with ❤️ for Indian cities · City Sphere 2.0</p>
+<p align="center">Made with ❤️ for Indian cities · City Sphere</p>
